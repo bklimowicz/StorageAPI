@@ -3,12 +3,8 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace MyWebApi.Models;
 
-public class Product
+public class Product : CollectionBase
 {
-    [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    public string? Id { get; set; }
-
     [BsonElement("name")] public string Name { get; set; } = null!;
     [BsonElement("location")] public string Location { get; set; } = null!;
     [BsonElement("quantity")] public float Quantity { get; set; }

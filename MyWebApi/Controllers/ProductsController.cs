@@ -1,70 +1,104 @@
 using Microsoft.AspNetCore.Mvc;
 using MyWebApi.Models;
 using MyWebApi.Services;
+using MyWebApi.Extensions;
 
 namespace MyWebApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ProductsController(ProductsService productsService) : ControllerBase
+public class ProductsController(IDatabaseService<Product> productsService) : ControllerBase
 {
-    private readonly ProductsService _productsService = productsService;
-
     [HttpGet("{id:length(24)}")]
     public async Task<IActionResult> Get(string id)
     {
-        var product = await _productsService.GetAsync(id);
+        try
+        {
+            var product = await productsService.GetAsync(id);
 
-        if (product is null)
-            return NotFound();
+            if (product is null)
+                return NotFound();
 
-        return Ok(product);
+            return Ok(product);
+        }
+        catch (Exception e)
+        {
+            return this.BadRequestWithException("Something went wrong.", e);
+        }
     }
     
     [HttpGet]
     public async Task<IActionResult> Get()
     {
-        var products = await _productsService.GetAsync();
+        try
+        {
+            var products = await productsService.GetAsync();
 
-        if (products.Count != 0)
-            return Ok(products);
+            if (products.Count != 0)
+                return Ok(products);
 
-        return NotFound();
+            return NotFound();
+        }
+        catch (Exception e)
+        {
+            return this.BadRequestWithException("Something went wrong.", e);
+        }
     }
 
     [HttpPost]
     public async Task<IActionResult> Post(Product product)
     {
-        await _productsService.CreateAsync(product);
+        try
+        {
+            await productsService.CreateAsync(product);
 
-        return CreatedAtAction(nameof(Get), new {id = product.Id}, product);
+            return CreatedAtAction(nameof(Get), new {id = product.Id}, product);
+        }
+        catch (Exception e)
+        {
+            return this.BadRequestWithException("Something went wrong.", e);
+        }
     }
 
     [HttpPut("{id:length(24)}")]
     public async Task<IActionResult> Update(string id, Product product)
     {
-        var existingProduct = await _productsService.GetAsync(id);
+        try
+        {
+            var existingProduct = await productsService.GetAsync(id);
 
-        if (existingProduct is null)
-            return BadRequest();
+            if (existingProduct is null)
+                return BadRequest();
 
-        product.Id = existingProduct.Id;
+            product.Id = existingProduct.Id;
 
-        await _productsService.UpdateAsync(product);
+            await productsService.UpdateAsync(product);
 
-        return NoContent();
+            return NoContent();
+        }
+        catch (Exception e)
+        {
+            return this.BadRequestWithException("Something went wrong.", e);
+        }
     }
 
     [HttpDelete("{id:length(24)}")]
     public async Task<IActionResult> Delete(string id)
     {
-        var existingProduct = await _productsService.GetAsync(id);
+        try
+        {
+            var existingProduct = await productsService.GetAsync(id);
 
-        if (existingProduct is null)
-            return BadRequest();
+            if (existingProduct is null)
+                return BadRequest();
 
-        await _productsService.RemoveAsync(id);
+            await productsService.RemoveAsync(id);
 
-        return NoContent();
+            return NoContent();
+        }
+        catch (Exception e)
+        {
+            return this.BadRequestWithException("Something went wrong.", e);
+        }
     }
 }
