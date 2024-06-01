@@ -7,7 +7,7 @@ namespace MyWebApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ProductsController(IDatabaseService<Product> productsService) : ControllerBase
+public class ProductsController(IProductsService productsService) : ControllerBase
 {
     [HttpGet("{id:length(24)}")]
     public async Task<IActionResult> Get(string id)
@@ -15,6 +15,42 @@ public class ProductsController(IDatabaseService<Product> productsService) : Con
         try
         {
             var product = await productsService.GetAsync(id);
+
+            if (product is null)
+                return NotFound();
+
+            return Ok(product);
+        }
+        catch (Exception e)
+        {
+            return this.BadRequestWithException("Something went wrong.", e);
+        }
+    }
+    
+    [HttpGet("byLocation/{location}")]
+    public async Task<IActionResult> GetByLocation(string location)
+    {
+        try
+        {
+            var products = await productsService.GetByLocationAsync(location);
+
+            if (products is null)
+                return NotFound();
+
+            return Ok(products);
+        }
+        catch (Exception e)
+        {
+            return this.BadRequestWithException("Something went wrong.", e);
+        }
+    }
+    
+    [HttpGet("byName/{name}")]
+    public async Task<IActionResult> GetByName(string name)
+    {
+        try
+        {
+            var product = await productsService.GetByNameAsync(name);
 
             if (product is null)
                 return NotFound();

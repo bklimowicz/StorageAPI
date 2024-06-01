@@ -7,7 +7,7 @@ namespace MyWebApi.Services;
 
 public class MongoService<T> : IDatabaseService<T> where T : CollectionBase
 {
-    private IMongoCollection<T> _collection;
+    protected IMongoCollection<T> _collection;
 
     public MongoService(IOptions<DatabaseSettings> databaseSettings)
     {
