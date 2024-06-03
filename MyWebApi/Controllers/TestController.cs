@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using MyWebApi.DataAccess;
-using MyWebApi.DataAccess.Models;
 using ILogger = MyWebApi.Services.LoggerService.ILogger;
 
 namespace MyWebApi.Controllers;
@@ -10,12 +8,10 @@ namespace MyWebApi.Controllers;
 public class TestController : ControllerBase
 {
     private readonly ILogger _loggerService;
-    private readonly LogsContext _dbContext;
     
-    public TestController(ILogger loggerService, LogsContext dbContext)
+    public TestController(ILogger loggerService)
     {
         _loggerService = loggerService;
-        _dbContext = dbContext;
     }
     
     [HttpGet]
