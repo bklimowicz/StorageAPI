@@ -1,3 +1,4 @@
+using MyWebApi.DataAccess;
 using MyWebApi.Services.LoggerService.Concrete;
 using MyWebApi.Services.LoggerService.Concrete.ConsoleLogger;
 using MyWebApi.Services.LoggerService.Concrete.DatabaseLogger;
@@ -21,8 +22,8 @@ public class LoggerConfiguration
         Strategies.Add(logger);
     }
     
-    public void AddDatabaseLogger()
+    public void AddDatabaseLogger(LogsContext context)
     {
-        Strategies.Add(new DatabaseLogger());
+        Strategies.Add(new DatabaseLogger(context));
     }
 }

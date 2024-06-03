@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWebApi.Console", "MyWebAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWebApi.Console.Tests", "MyWebApi.Console.Tests\MyWebApi.Console.Tests.csproj", "{F63681EE-7A11-4FD1-B059-3FF7FBDCA5DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWebApi.DataAccess", "MyWebApi.DataAccess\MyWebApi.DataAccess.csproj", "{FD133246-36E7-4DF1-BA39-CE7016A12019}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{F63681EE-7A11-4FD1-B059-3FF7FBDCA5DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F63681EE-7A11-4FD1-B059-3FF7FBDCA5DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F63681EE-7A11-4FD1-B059-3FF7FBDCA5DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD133246-36E7-4DF1-BA39-CE7016A12019}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD133246-36E7-4DF1-BA39-CE7016A12019}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD133246-36E7-4DF1-BA39-CE7016A12019}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD133246-36E7-4DF1-BA39-CE7016A12019}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

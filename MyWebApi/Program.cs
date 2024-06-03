@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using MyWebApi.Configuration;
+using MyWebApi.DataAccess;
 using MyWebApi.Extensions;
 using MyWebApi.Services;
 using MyWebApi.Services.LoggerService.Concrete.FileLogger;
@@ -10,6 +12,7 @@ Console.WriteLine(builder.Environment.ContentRootPath);
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("MongoDatabase"));
 builder.Services.AddScoped<IProductsService, ProductsService>();
 builder.Services.AddScoped(typeof(IDatabaseService<>), typeof(MongoService<>));
+builder.Services.AddDbContext<LogsContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("TestDb")));
 builder.Services.AddLoggerService(cfg =>
 {
     cfg.AddConsoleLogger();
@@ -17,6 +20,7 @@ builder.Services.AddLoggerService(cfg =>
     {
         Path = builder.Environment.ContentRootPath
     });
+    cfg.AddDatabaseLogger(builder.Services.BuildServiceProvider().GetService<LogsContext>()!);
 });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
