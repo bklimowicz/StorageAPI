@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsersApi", "UsersApi\UsersA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsersApi.Tests", "UsersApi.Tests\UsersApi.Tests.csproj", "{BE413D56-089B-4DA0-A451-3D8C86AFCD53}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MyWebApi.Users", "MyWebApi.Users", "{3F1F6C7C-163D-4CB7-9A08-B4786FD763EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{BE413D56-089B-4DA0-A451-3D8C86AFCD53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE413D56-089B-4DA0-A451-3D8C86AFCD53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE413D56-089B-4DA0-A451-3D8C86AFCD53}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3CB19D10-0382-47F5-96E1-F24A34957EEA} = {3F1F6C7C-163D-4CB7-9A08-B4786FD763EB}
+		{BE413D56-089B-4DA0-A451-3D8C86AFCD53} = {3F1F6C7C-163D-4CB7-9A08-B4786FD763EB}
 	EndGlobalSection
 EndGlobal
